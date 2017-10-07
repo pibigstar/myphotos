@@ -31,7 +31,7 @@
     </div>
     <div id="footer">
 
-        <a>关于我@qq741047261 &nbsp &nbsp|&nbsp &nbsp</a> <a>Copyright © 2015
+        <a>关于我@qq741047261 &nbsp &nbsp|&nbsp &nbsp</a> <a>Copyright © 2017
             派大星 保留所有权利 沪ICP备110号-1</a>
     </div>
     <div id="cloud"></div>
