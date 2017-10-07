@@ -23,7 +23,7 @@
 				<input id="valid" name="code" placeholder="请输入验证码" maxlength="4"> 
 				<span id="validcode"> 
 				<img id="verifyCodePic" onclick="this.src='createCode.do?d='+Math.random();" alt="验证码" src="createCode.do">  
-				</span><span><a id="changeimg" href="#">换一张</a> </span></li>
+				</span><span><a id="changeimg" href="javascript:changeCode()">换一张</a> </span></li>
 				<li><button id="login" class="form_btn">立即登录</button></li>
 				<li><span id="err" style="display: inline-block;"></span></li>
 			</ul>
@@ -69,11 +69,12 @@
 					return false;
 				}
 			});
-			
-			$('#changeimg').click(function() {
-				$('#verifyCodePic').src = 'createCode.do?d=' + Math.random();
-			});
 		}
+		
+		function changeCode(){
+			$("#verifyCodePic").attr({src:'createCode.do?d=' + Math.random()});
+		}
+		
 	</script>
 
 
