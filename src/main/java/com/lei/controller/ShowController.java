@@ -21,7 +21,7 @@ public class ShowController {
 		
 		mv.getModel().put("name", user);
 		
-		mv.setViewName("index");
+		mv.setViewName("hualang");
 		
 		return mv;
 	}
@@ -38,7 +38,7 @@ public class ShowController {
 		
 		mv.getModel().put("name", user);
 		
-		mv.setViewName("index2");
+		mv.setViewName("yuanbotu");
 		
 		return mv;
 	}

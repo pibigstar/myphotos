@@ -25,7 +25,7 @@ public class UserController {
 		User tUser = userService.login(user);
 		if (tUser!=null) {
 			mv.setViewName("index");
-			mv.getModel().put("name", "tongzhen");
+			mv.getModel().put("user", tUser);
 			return mv;
 		}else {
 			mv.setViewName("login");
