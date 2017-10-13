@@ -1,5 +1,7 @@
 package com.lei.controller;
 
+import java.util.UUID;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,12 +22,12 @@ public class UserController {
 	private UserServiceI userService;
 
 	@RequestMapping(value = "/login.do",method = RequestMethod.POST)
-	public ModelAndView login(User user) {
+	public ModelAndView login(User user,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User tUser = userService.login(user);
 		if (tUser!=null) {
 			mv.setViewName("index");
-			mv.getModel().put("user", tUser);
+			session.setAttribute("user", tUser);
 			return mv;
 		}else {
 			mv.setViewName("login");
@@ -43,6 +45,7 @@ public class UserController {
 		String imgCode =(String)session.getAttribute("code");  
 
 		if (imgCode.equals(code)) {
+			user.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 			userService.regist(user);
 			mv.setViewName("login");
 			mv.getModel().put("user", user);

@@ -18,7 +18,7 @@
 			<ul style="text-align: center;">
 				<li style="font-size: 48px">个人相册登录</li>
 				<li><input class="name" name="username" value="${user.username }" placeholder="请输入用户名"></li>
-				<li><input type="password" name="password" value="${user.password }" class="pwd" placeholder="请输入密码"></li>
+				<li><input type="password" name="password" class="pwd" placeholder="请输入密码"></li>
 				<li id="verifyCode" style="display: block;">
 				<input id="valid" name="code" placeholder="请输入验证码" maxlength="4"> 
 				<span id="validcode"> 

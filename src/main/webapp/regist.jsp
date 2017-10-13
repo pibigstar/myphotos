@@ -1,15 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+<script src="js/jquery.js" type="text/javascript" charset="UTF-8"></script>
 <link rel="stylesheet" href="css/login.css">
 <title>用户注册</title>
 </head>
 <body>
+<c:if test="${message!=null }">
+    <script>
+    $("#err").css("display", "inline-block");
+    $("#err").text("验证码错误");
+    </script>
+</c:if>
     <div id="sky"></div>
     <div id="head"></div>
     <div id="middle">
@@ -36,8 +44,6 @@
     </div>
     <div id="cloud"></div>
 
-<script src="js/jquery.js" type="text/javascript" charset="UTF-8"></script>
-    
 <script language='javascript' type='text/javascript'>
         $(document).ready(function() {
             init();

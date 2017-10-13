@@ -3,13 +3,13 @@ package com.lei.dao;
 import com.lei.model.Photo;
 
 public interface PhotoMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Photo record);
 
     int insertSelective(Photo record);
 
-    Photo selectByPrimaryKey(Integer id);
+    Photo selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Photo record);
 
