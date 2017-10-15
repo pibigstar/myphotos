@@ -30,6 +30,9 @@
     <script type="text/javascript" src="${layoutJs}/plugins/forms/styling/uniform.min.js"></script>
     <script type="text/javascript" src="${layoutJs}/core/app.js"></script>
     <script type="text/javascript" src="${layoutJs}/pages/form_layouts.js"></script>
+    
+    <script type="text/javascript" src="${layoutJs}/pages/uploader_bootstrap.js"></script>
+    <script type="text/javascript" src="${layoutJs}/plugins/uploaders/fileinput.min.js"></script>
     <!-- /theme JS files -->
 
 </head>
@@ -141,7 +144,7 @@
 
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><a href="${prc }/user.jsp"><i class="icon-user-plus"></i> 个人中心</a></li>
-                        <li><a href="#"><i class="icon-coins"></i> 我的作品</a></li>
+                        <li><a href="${prc }/myphotos.jsp"><i class="icon-coins"></i> 我的作品</a></li>
                         <li><a href="#"><span class="badge bg-teal-400 pull-right">5</span> <i class="icon-comment-discussion"></i> 我的信息</a></li>
                         <li class="divider"></li>
                         <li><a href="#"><i class="icon-cog5"></i> 个人设置</a></li>
@@ -262,7 +265,79 @@
                 <!-- 中间中部 -->
                 <div class="content">
 
-                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="createPhoto.do" method="post"  enctype="multipart/form-data">
+                                <div class="panel panel-flat">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <h5 class="panel-title">Centered form</h5>
+                                                <div class="heading-elements">
+                                                    <ul class="icons-list">
+                                                        <li><a data-action="collapse"></a></li>
+                                                        <li><a data-action="reload"></a></li>
+                                                        <li><a data-action="close"></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                            
+                                                <div class="form-group">
+                                                    <label>图片上传:</label>
+                                                    <div class="col-lg-12">
+                                                    <input type="file" name="images" class="file-input-ajax" multiple="multiple">
+                                                    <span class="help-block">请选择你要上传的图片，一次最多只能上传12张</span>
+                                                    </div>
+                                                </div>
+                                            
+                                            
+                                                <div class="form-group">
+                                                    <label>相册名:</label>
+                                                    <input type="text" class="form-control" placeholder="Eugene Kopyov">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>主题:</label>
+                                                    <select name="theme" class="form-control">
+                                            
+                                                        <option>3D画廊</option>
+                                                        <option>圆播图</option>
+                                                
+                                              
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>背景音乐:</label>
+                                                    <input name="mp3" type="file" class="file-styled">
+                                                    <span class="help-block">默认背景音乐为love.mp3,只能上传MP3文件</span>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>相册描述:</label>
+                                                    <textarea name="desc" rows="5" cols="5" class="form-control" placeholder="Enter your message here"></textarea>
+                                                </div>
+
+                                                <div class="text-right">
+                                                    <button type="submit" class="btn btn-primary">上传 <i class="icon-arrow-right14 position-right"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        
+                    </form>
+                    <!-- /2 columns form -->
+
+                    </div>
 
 
                     <!-- 中间中部的底部 -->

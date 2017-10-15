@@ -170,7 +170,7 @@
                     <div class="sidebar-user">
                         <div class="category-content">
                             <div class="media">
-                                <a href="#" class="media-left"><img src="${layoutImages}/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+                                <a href="${prc }/user.jsp" class="media-left"><img src="${layoutImages}/placeholder.jpg" class="img-circle img-sm" alt=""></a>
                                 <div class="media-body">
                                     <span class="media-heading text-semibold">${user.username }</span>
                                     <div class="text-size-mini text-muted">
@@ -181,7 +181,7 @@
                                 <div class="media-right media-middle">
                                     <ul class="icons-list">
                                         <li>
-                                            <a href="#"><i class="icon-cog3"></i></a>
+                                            <a href="${prc }/user.jsp"><i class="icon-cog3"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -189,42 +189,32 @@
                         </div>
                     </div>
 
-
-
                     <!-- 左边菜单栏 -->
                     <div class="sidebar-category sidebar-category-visible">
                         <div class="category-content no-padding">
                             <ul class="navigation navigation-main navigation-accordion">
-
                                 
                                 <li class="navigation-header"><span>我的相册</span> <i class="icon-menu" title="我的菜单"></i></li>
                                 <li class="active"><a href="index.jsp"><i class="icon-home4"></i> <span>首页</span></a></li>
-                                
                                 <li>
                                     <a href="#"><i class="icon-copy"></i> <span>3D画廊相册</span></a>
                                     <ul>
                                         <li><a href="${user.username}/show.do"  id="layout1">童真</a></li>                         
                                     </ul>
                                 </li>
-                                
                                 <li>
                                     <a href="#"><i class="icon-droplet2"></i> <span>轮播图相册</span></a>
                                         <ul>
                                         <li><a href="${user.username}/show.do" id="layout1">童真</a></li>                         
                                     </ul>
-                                    
                                 </li>
-                    
 
                                 <!-- 系统功能 -->
                                 <li class="navigation-header"><span>系统功能</span> <i class="icon-menu" title="系统设置"></i></li>
-                                
-                                
                                 <li>
                                     <a href="fankui.jsp"><i class="icon-spell-check"></i> <span>反馈</span></a>               
                                 </li>
                                 <!-- 系统功能end -->
-
                             </ul>
                         </div>
                     </div>
@@ -233,9 +223,9 @@
         <!-- 菜单栏 end-->
 
 
-            <!-- 中间部分 -->
+            <!-- 中间 -->
             <div class="content-wrapper">
-                <!-- Page header -->
+                <!-- 中间头部 -->
                 <div class="page-header page-header-default">
                     <div class="page-header-content">
                         <div class="page-title">
@@ -250,21 +240,17 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="breadcrumb-line">
                         <ul class="breadcrumb">
                             <li><a href="index.jsp"><i class="icon-home2 position-left"></i> 首页</a></li>
                             <li class="active">我的相册</li>
                         </ul>
-
                         <ul class="breadcrumb-elements">
-                            <li><a href="#"><i class="icon-comment-discussion position-left"></i> Support</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="icon-gear position-left"></i>设置
                                     <span class="caret"></span>
                                 </a>
-
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a href="user.jsp"><i class="icon-user-lock"></i> 个人信息设置</a></li>
                                     <li><a href="#"><i class="icon-statistics"></i> 绑定手机</a></li>
@@ -276,89 +262,104 @@
                 <!-- /中间头部 -->
 
 
-                <!-- 中间区域 -->
+                <!-- 中间中部 -->
                 <div class="content">
+                    <!-- Image grid -->
+                    <h6 class="content-group text-semibold">
+                        我的作品
+                        <small class="display-block">3D画廊</small>
+                    </h6>
 
-					<form action="${prc }/updateUser.do" method="post"  enctype="multipart/form-data">
-						<div class="panel panel-flat">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-md-10 col-md-offset-1">
-										<h5 class="panel-title">个人信息修改</h5>
-										<div class="heading-elements">
-											<ul class="icons-list">
-												<li><a data-action="collapse"></a></li>
-												<li><a data-action="reload"></a></li>
-												<li><a data-action="close"></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-10 col-md-offset-1">
-                                      
-										<div class="form-group">
-											<label>用户名：</label> <input name="username" value="${user.username }" class="form-control" readonly="readonly">
-										        <input name="id" value="${user.id }" type="hidden">
-										</div>
-										<div class="form-group">
-											<label>密码:</label><input name="password" type="password" value="${user.password }" class="form-control" readonly="readonly">
-										</div>
-										<div class="form-group">
-                                            <label>昵称：</label> <input name="nick" value="${user.nick }" class="form-control" placeholder="请输入你的昵称">
-                                        </div>
-										<div class="form-group">
-											<label>头像:</label> 
-											<input name="headFile" type="file" class="file-input"> 
-											<span class="help-block">只能上传: gif, png, jpg.文件大小不能超过 5MB</span>
-										</div>
-										
-										<div class="form-group">
-                                            <label>邮箱：</label> <input name="email"  value="${user.email }" class="form-control" placeholder="请输入你的邮箱">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>手机号：</label> <input name="phone"  value="${user.phone }" class="form-control" placeholder="请输入你的手机号">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>地址：</label> <input name="address"  value="${user.address }" class="form-control" placeholder="请输入你的地址">
-                                        </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="thumbnail">
+                                <div class="thumb">
+                                    <img src="assets/images/placeholder.jpg" alt="">
+                                    <div class="caption-overflow">
+                                        <span>
+                                            <a href="assets/images/placeholder.jpg" data-popup="lightbox" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
+                                            <a href="#" class="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i class="icon-link2"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
 
-										<div class="form-group">
-											<label>个性签名:</label>
-											<textarea rows="5" cols="5" class="form-control" placeholder="请输入内容"></textarea>
-										</div>
+                                <div class="caption">
+                                    <h6 class="no-margin-top text-semibold"><a href="#" class="text-default">For ostrich much</a> <a href="#" class="text-muted"><i class="icon-cog3 pull-right"></i></a></h6>
+                                    Some various less crept gecko the jeepers dear forewent 
+                                </div>
+                            </div>
+                        </div>
 
-										<div class="text-right">
-											<button type="submit" class="btn btn-primary">提交
-												<i class="icon-arrow-right14 position-right"></i>
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="thumbnail">
+                                <div class="thumb">
+                                    <img src="assets/images/placeholder.jpg" alt="">
+                                    <div class="caption-overflow">
+                                        <span>
+                                            <a href="assets/images/placeholder.jpg" data-popup="lightbox" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
+                                            <a href="#" class="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i class="icon-link2"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
 
+                                <div class="caption">
+                                    <h6 class="no-margin-top text-semibold"><a href="#" class="text-default">An so vulgar</a> <a href="#" class="text-muted"><i class="icon-cog3 pull-right"></i></a></h6>
+                                    Delightful unreserved impossible few estimating men favourable 
+                                </div>
+                            </div>
+                        </div>
 
-					<!-- Footer -->
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="thumbnail">
+                                <div class="thumb">
+                                    <img src="assets/images/placeholder.jpg" alt="">
+                                    <div class="caption-overflow">
+                                        <span>
+                                            <a href="assets/images/placeholder.jpg" data-popup="lightbox" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
+                                            <a href="#" class="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i class="icon-link2"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="caption">
+                                    <h6 class="no-margin-top text-semibold"><a href="#" class="text-default">Not rapturous</a> <a href="#" class="text-muted"><i class="icon-cog3 pull-right"></i></a></h6>
+                                    He or entrance humoured likewise moderate. Much nor game
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="thumbnail">
+                                <div class="thumb">
+                                    <img src="assets/images/placeholder.jpg" alt="">
+                                    <div class="caption-overflow">
+                                        <span>
+                                            <a href="assets/images/placeholder.jpg" data-popup="lightbox" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
+                                            <a href="#" class="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i class="icon-link2"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="caption">
+                                    <h6 class="no-margin-top text-semibold"><a href="#" class="text-default">He it otherwise</a> <a href="#" class="text-muted"><i class="icon-cog3 pull-right"></i></a></h6>
+                                    Chapter too parties its letters nor. Cheerful but whatever ladyship disposed judgment us
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 中间中部的底部 -->
                     <div class="footer text-muted">
                         &copy; 2017. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
                     </div>
-                    <!-- /footer -->
+                    <!-- /中间中部的底部 -->
 
                 </div>
-                <!-- /content area -->
+                <!-- /中间中部 -->
 
             </div>
-            <!-- /main content -->
-
+            <!-- /中间 -->
         </div>
-        <!-- /page content -->
-
     </div>
-    <!-- /page container -->
-
 </body>
 </html>

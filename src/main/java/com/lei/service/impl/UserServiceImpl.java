@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserServiceI {
 		user.setPassword(EncryptUtil.e(user.getPassword()));
 		userMapper.insert(user);
 	}
+
+	@Override
+	public void update(User user) {
+		userMapper.updateByPrimaryKeySelective(user);
+	}
 }

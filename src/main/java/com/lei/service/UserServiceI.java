@@ -8,4 +8,5 @@ public interface UserServiceI {
 	
 	public void regist(User user);
 
+	public void update(User user);
 }
