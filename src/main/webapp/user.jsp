@@ -279,7 +279,7 @@
                 <!-- 中间区域 -->
                 <div class="content">
 
-					<form action="${prc }/updateUser.do" method="post"  enctype="multipart/form-data">
+					<form action="${prc }/user.do?updateUser" method="post"  enctype="multipart/form-data">
 						<div class="panel panel-flat">
 							<div class="panel-heading">
 								<div class="row">

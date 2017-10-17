@@ -10,10 +10,16 @@
 <title>用户登录</title>
 </head>
 <body>
+<c:if test="${message!=null }">
+    <script>
+       $("#err").css("display", "inline-block");
+       $("#err").text("验证码错误");
+    </script>
+</c:if>
 	<div id="sky"></div>
 	<div id="head"></div>
 	<div id="middle">
-		<form action="login.do" method="post">
+		<form action="user.do?login" method="post">
 
 			<ul style="text-align: center;">
 				<li style="font-size: 48px">个人相册登录</li>
@@ -70,13 +76,10 @@
 				}
 			});
 		}
-		
+		//更换验证码
 		function changeCode(){
 			$("#verifyCodePic").attr({src:'createCode.do?d=' + Math.random()});
 		}
-		
 	</script>
-
-
 </body>
 </html>

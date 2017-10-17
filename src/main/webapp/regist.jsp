@@ -14,14 +14,14 @@
 <body>
 <c:if test="${message!=null }">
     <script>
-    $("#err").css("display", "inline-block");
-    $("#err").text("验证码错误");
+       $("#err").css("display", "inline-block");
+       $("#err").text("验证码错误");
     </script>
 </c:if>
     <div id="sky"></div>
     <div id="head"></div>
     <div id="middle">
-        <form action="regist.do" method="post">
+        <form action="user.do?regist" method="post">
 
             <ul style="text-align: center;">
                 <li style="font-size: 48px">个人相册注册</li>

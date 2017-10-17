@@ -267,12 +267,12 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="createPhoto.do" method="post"  enctype="multipart/form-data">
+                            <form action="${prc }/createPhoto.do" method="post"  enctype="multipart/form-data">
                                 <div class="panel panel-flat">
                                     <div class="panel-heading">
                                         <div class="row">
                                             <div class="col-md-10 col-md-offset-1">
-                                                <h5 class="panel-title">Centered form</h5>
+                                                <h5 class="panel-title">相册生成</h5>
                                                 <div class="heading-elements">
                                                     <ul class="icons-list">
                                                         <li><a data-action="collapse"></a></li>
@@ -291,7 +291,7 @@
                                                 <div class="form-group">
                                                     <label>图片上传:</label>
                                                     <div class="col-lg-12">
-                                                    <input type="file" name="images" class="file-input-ajax" multiple="multiple">
+                                                    <input type="file" name="imagesFile" class="file-input-ajax" multiple="multiple">
                                                     <span class="help-block">请选择你要上传的图片，一次最多只能上传12张</span>
                                                     </div>
                                                 </div>
@@ -299,28 +299,26 @@
                                             
                                                 <div class="form-group">
                                                     <label>相册名:</label>
-                                                    <input type="text" class="form-control" placeholder="Eugene Kopyov">
+                                                    <input type="text" name="name" class="form-control" placeholder="请输入相册名">
+                                                    <input type="hidden" name="username" value="${user.username }" class="form-control" >
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>主题:</label>
                                                     <select name="theme" class="form-control">
-                                            
-                                                        <option>3D画廊</option>
-                                                        <option>圆播图</option>
-                                                
-                                              
+                                                        <option value="1">3D画廊</option>
+                                                        <option value="2">圆播图</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>背景音乐:</label>
-                                                    <input name="mp3" type="file" class="file-styled">
+                                                    <input name="mp3File" type="file" class="file-styled">
                                                     <span class="help-block">默认背景音乐为love.mp3,只能上传MP3文件</span>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>相册描述:</label>
-                                                    <textarea name="desc" rows="5" cols="5" class="form-control" placeholder="Enter your message here"></textarea>
+                                                    <textarea name="desc" rows="5" cols="5" class="form-control" placeholder="请输入你对此相册的描述"></textarea>
                                                 </div>
 
                                                 <div class="text-right">
@@ -332,12 +330,8 @@
                                 </div>
                             </form>
                         </div>
-
-                        
                     </form>
-                    <!-- /2 columns form -->
-
-                    </div>
+                 </div>
 
 
                     <!-- 中间中部的底部 -->

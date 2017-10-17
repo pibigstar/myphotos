@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,32 +17,56 @@ import com.lei.model.User;
 import com.lei.service.UserServiceI;
 import com.lei.utils.QiNiuUtil;
 import com.lei.utils.ResourceUtil;
-
+@RequestMapping(value = "user.do")
 @Controller
 public class UserController {
 
 	@Resource
 	private UserServiceI userService;
 
+	@RequestMapping(params="toIndex")
+	public String toIndex(ModelMap modelMap) {
+		return "redirect:index.jsp";
+	}
+	
+	@RequestMapping(params="toLogin")
+	public String toLogin(ModelMap modelMap) {
+		return "redirect:login.jsp";
+	}
+	@RequestMapping(params="toRegist")
+	public String toRegist(ModelMap modelMap) {
+		return "redirect:regist.jsp";
+	}
+	@RequestMapping(params="toUser")
+	public String toUser(ModelMap modelMap) {
+		return "redirect:user.jsp";
+	}
+	
+	
 	/**
 	 * 登录
 	 * @param user
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/login.do",method = RequestMethod.POST)
-	public ModelAndView login(User user,HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		User tUser = userService.login(user);
-		if (tUser!=null) {
-			mv.setViewName("index");
-			session.setAttribute("user", tUser);
-			return mv;
+	@RequestMapping(params = "login",method = RequestMethod.POST)
+	public String login(String code,User user,HttpSession session,ModelMap modelMap) {
+		String imgCode =(String)session.getAttribute("code");  
+		System.out.println(code+"****"+imgCode);
+		if (imgCode.equals(code)) {
+			User tUser = userService.login(user);
+			if (tUser!=null) {
+				session.setAttribute("user", tUser);
+				return "redirect:user.do?toIndex";
+			}else {
+				modelMap.put("message", "登录失败！");
+				return "redirect:user.do?toLogin";
+			}
 		}else {
-			mv.setViewName("login");
-			mv.getModel().put("message", "登录失败！");
-			return mv;
+			modelMap.put("message", "验证码错误");
+			return "redirect:user.do?toLogin";
 		}
+		
 	}
 	/**
 	 * 注册
@@ -50,24 +75,20 @@ public class UserController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/regist.do",method = RequestMethod.POST)
-	public ModelAndView regist(User user,HttpSession session, HttpServletRequest request) {
-		
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping(params = "regist",method = RequestMethod.POST)
+	public String regist(User user,HttpSession session, HttpServletRequest request,ModelMap modelMap) {
 		
 		String code = request.getParameter("code").toUpperCase();  
 		String imgCode =(String)session.getAttribute("code");  
-
+		System.out.println(code+"****"+imgCode);
 		if (imgCode.equals(code)) {
 			user.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 			userService.regist(user);
-			mv.setViewName("login");
-			mv.getModel().put("user", user);
-			return mv;
+			modelMap.put("user", user);
+			return "login";
 		}else{  
-			mv.setViewName("regist");
-			mv.getModel().put("message", "验证码错误！");
-			return mv;
+			modelMap.put("message", "验证码错误");
+			return "redirect:user.do?toRegist";
 		}  
 	}
 	
@@ -78,10 +99,8 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="updateUser.do",method = RequestMethod.POST)
-	public ModelAndView updateUser(MultipartFile headFile,HttpServletRequest request,User user) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user");
+	@RequestMapping(params="updateUser",method = RequestMethod.POST)
+	public String updateUser(MultipartFile headFile,ModelMap modelMap,HttpServletRequest request,User user) {
         try {
 			String savePath = "images/"+UUID.randomUUID().toString()+".jpg";
 			
@@ -90,12 +109,10 @@ public class UserController {
 			user.setIcon(ResourceUtil.getConfigByName("qiniu.path")+savePath);
 			
 			userService.update(user);
-			mv.getModel().put("message", "更新用户信息成功");
+			modelMap.put("message", "更新用户信息成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-          
-        return mv;  
-		
+        return "redirect:user.do?toUser";  
 	}
 }
