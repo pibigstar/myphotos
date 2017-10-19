@@ -267,7 +267,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="${prc }/createPhoto.do" method="post"  enctype="multipart/form-data">
+                            <form action="${prc }/photo.do?createPhoto" method="post" enctype="multipart/form-data">
                                 <div class="panel panel-flat">
                                     <div class="panel-heading">
                                         <div class="row">
@@ -291,7 +291,7 @@
                                                 <div class="form-group">
                                                     <label>图片上传:</label>
                                                     <div class="col-lg-12">
-                                                    <input type="file" name="imagesFile" class="file-input-ajax" multiple="multiple">
+                                                    <input type="file" id="imagesFile" name="imagesFile" multiple data-min-file-count="1">
                                                     <span class="help-block">请选择你要上传的图片，一次最多只能上传12张</span>
                                                     </div>
                                                 </div>
@@ -300,7 +300,6 @@
                                                 <div class="form-group">
                                                     <label>相册名:</label>
                                                     <input type="text" name="name" class="form-control" placeholder="请输入相册名">
-                                                    <input type="hidden" name="username" value="${user.username }" class="form-control" >
                                                 </div>
 
                                                 <div class="form-group">
@@ -318,11 +317,11 @@
 
                                                 <div class="form-group">
                                                     <label>相册描述:</label>
-                                                    <textarea name="desc" rows="5" cols="5" class="form-control" placeholder="请输入你对此相册的描述"></textarea>
+                                                    <textarea name="photoDescribe" rows="5" cols="5" class="form-control" placeholder="请输入你对此相册的描述"></textarea>
                                                 </div>
-
+                                                <div id="imgsdiv" class="hidden"></div>
                                                 <div class="text-right">
-                                                    <button type="submit" class="btn btn-primary">上传 <i class="icon-arrow-right14 position-right"></i></button>
+                                                    <button onclick="upload()" class="btn btn-primary">上传 <i class="icon-arrow-right14 position-right"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -347,5 +346,41 @@
             <!-- /中间 -->
         </div>
     </div>
+    <script type="text/javascript">
+             $(function () {
+            	  $("#imagesFile").fileinput({
+                      uploadUrl : "upload.do?uploadImg",//上传图片的url
+                      allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+                      overwriteInitial : false,
+                      maxFileSize : 1000,//上传文件最大的尺寸
+                      maxFilesNum : 1,//上传最大的文件数量
+                      initialCaption: "请上传你的照片",//文本框初始话value
+                      slugCallback : function(filename) {
+                          return filename.replace('(', '_').replace(']', '_');
+                      }
+                  });
+                          
+            	  $('#imagesFile').on('fileuploaded', function(event, data, previewId, index) {
+                      var form = data.form, files = data.files, extra = data.extra,
+                       response = data.response, reader = data.reader;
+                      $("#imgsdiv").append("<input type='hidden' name='imagesPath' value='"+response.paths+"'>")
+                       console.log(response.paths);//打印出路径
+                    });
+            	  
+            	  function checkUpload(){
+                      alert(11);
+                      if($("input[name=imagesPath]").length>0){
+                          return true;
+                      }else{
+                          alert("请先上传照片");
+                          return false;
+                      }
+                  }
+             });
+            	  function upload(){
+            		  if(checkUpload){
+            		  }
+            	  }
+    </script>
 </body>
 </html>

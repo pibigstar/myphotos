@@ -5,8 +5,9 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="theme" property="theme" jdbcType="VARCHAR" />
-    <result column="img" property="img" jdbcType="VARCHAR" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="imgs_path" property="imgsPath" jdbcType="VARCHAR" />
+    <result column="cover_path" property="coverPath" jdbcType="VARCHAR" />
+    <result column="photo_describe" property="photoDescribe" jdbcType="VARCHAR" />
     <result column="mp3_path" property="mp3Path" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -14,7 +15,8 @@
     <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, theme, img, desc, mp3_path, user_id, create_time, update_time, delete_flag
+    id, name, theme, imgs_path, cover_path, photo_describe, mp3_path, user_id, create_time, 
+    update_time, delete_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -28,13 +30,13 @@
   </delete>
   <insert id="insert" parameterType="com.lei.model.Photo" >
     insert into t_photos (id, name, theme, 
-      img, desc, mp3_path, 
-      user_id, create_time, update_time, 
-      delete_flag)
+      imgs_path, cover_path, photo_describe, 
+      mp3_path, user_id, create_time, 
+      update_time, delete_flag)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR}, 
-      #{img,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{mp3Path,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{deleteFlag,jdbcType=VARCHAR})
+      #{imgsPath,jdbcType=VARCHAR}, #{coverPath,jdbcType=VARCHAR}, #{photoDescribe,jdbcType=VARCHAR}, 
+      #{mp3Path,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lei.model.Photo" >
     insert into t_photos
@@ -48,11 +50,14 @@
       <if test="theme != null" >
         theme,
       </if>
-      <if test="img != null" >
-        img,
+      <if test="imgsPath != null" >
+        imgs_path,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="coverPath != null" >
+        cover_path,
+      </if>
+      <if test="photoDescribe != null" >
+        photo_describe,
       </if>
       <if test="mp3Path != null" >
         mp3_path,
@@ -80,11 +85,14 @@
       <if test="theme != null" >
         #{theme,jdbcType=VARCHAR},
       </if>
-      <if test="img != null" >
-        #{img,jdbcType=VARCHAR},
+      <if test="imgsPath != null" >
+        #{imgsPath,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
+      <if test="coverPath != null" >
+        #{coverPath,jdbcType=VARCHAR},
+      </if>
+      <if test="photoDescribe != null" >
+        #{photoDescribe,jdbcType=VARCHAR},
       </if>
       <if test="mp3Path != null" >
         #{mp3Path,jdbcType=VARCHAR},
@@ -112,11 +120,14 @@
       <if test="theme != null" >
         theme = #{theme,jdbcType=VARCHAR},
       </if>
-      <if test="img != null" >
-        img = #{img,jdbcType=VARCHAR},
+      <if test="imgsPath != null" >
+        imgs_path = #{imgsPath,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="coverPath != null" >
+        cover_path = #{coverPath,jdbcType=VARCHAR},
+      </if>
+      <if test="photoDescribe != null" >
+        photo_describe = #{photoDescribe,jdbcType=VARCHAR},
       </if>
       <if test="mp3Path != null" >
         mp3_path = #{mp3Path,jdbcType=VARCHAR},
@@ -140,8 +151,9 @@
     update t_photos
     set name = #{name,jdbcType=VARCHAR},
       theme = #{theme,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      imgs_path = #{imgsPath,jdbcType=VARCHAR},
+      cover_path = #{coverPath,jdbcType=VARCHAR},
+      photo_describe = #{photoDescribe,jdbcType=VARCHAR},
       mp3_path = #{mp3Path,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

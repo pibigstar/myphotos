@@ -52,19 +52,18 @@ public class UserController {
 	@RequestMapping(params = "login",method = RequestMethod.POST)
 	public String login(String code,User user,HttpSession session,ModelMap modelMap) {
 		String imgCode =(String)session.getAttribute("code");  
-		System.out.println(code+"****"+imgCode);
-		if (imgCode.equals(code)) {
+		if (imgCode.equals(code.toUpperCase())) {
 			User tUser = userService.login(user);
 			if (tUser!=null) {
 				session.setAttribute("user", tUser);
 				return "redirect:user.do?toIndex";
 			}else {
 				modelMap.put("message", "登录失败！");
-				return "redirect:user.do?toLogin";
+				return "login";
 			}
 		}else {
 			modelMap.put("message", "验证码错误");
-			return "redirect:user.do?toLogin";
+			return "login";
 		}
 		
 	}
@@ -80,7 +79,6 @@ public class UserController {
 		
 		String code = request.getParameter("code").toUpperCase();  
 		String imgCode =(String)session.getAttribute("code");  
-		System.out.println(code+"****"+imgCode);
 		if (imgCode.equals(code)) {
 			user.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 			userService.regist(user);

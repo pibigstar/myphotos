@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="config/config.jsp" %>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -10,12 +11,6 @@
 <title>用户登录</title>
 </head>
 <body>
-<c:if test="${message!=null }">
-    <script>
-       $("#err").css("display", "inline-block");
-       $("#err").text("验证码错误");
-    </script>
-</c:if>
 	<div id="sky"></div>
 	<div id="head"></div>
 	<div id="middle">
@@ -31,7 +26,7 @@
 				<img id="verifyCodePic" onclick="this.src='createCode.do?d='+Math.random();" alt="验证码" src="createCode.do">  
 				</span><span><a id="changeimg" href="javascript:changeCode()">换一张</a> </span></li>
 				<li><button id="login" class="form_btn">立即登录</button></li>
-				<li><span id="err" style="display: inline-block;"></span></li>
+				<li><span id="err" style="display: inline-block;">${message }</span></li>
 			</ul>
 		</form>
 	</div>

@@ -9,9 +9,11 @@ public class Photo {
 
     private String theme;
 
-    private String img;
+    private String imgsPath;
 
-    private String desc;
+    private String coverPath;
+
+    private String photoDescribe;
 
     private String mp3Path;
 
@@ -47,20 +49,28 @@ public class Photo {
         this.theme = theme == null ? null : theme.trim();
     }
 
-    public String getImg() {
-        return img;
+    public String getImgsPath() {
+        return imgsPath;
     }
 
-    public void setImg(String img) {
-        this.img = img == null ? null : img.trim();
+    public void setImgsPath(String imgsPath) {
+        this.imgsPath = imgsPath == null ? null : imgsPath.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getCoverPath() {
+        return coverPath;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath == null ? null : coverPath.trim();
+    }
+
+    public String getPhotoDescribe() {
+        return photoDescribe;
+    }
+
+    public void setPhotoDescribe(String photoDescribe) {
+        this.photoDescribe = photoDescribe == null ? null : photoDescribe.trim();
     }
 
     public String getMp3Path() {
