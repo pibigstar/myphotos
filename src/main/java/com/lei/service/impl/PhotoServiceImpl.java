@@ -1,5 +1,7 @@
 package com.lei.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -19,4 +21,18 @@ public class PhotoServiceImpl implements PhotoServiceI {
 		photoMapper.insert(photo);
 	}
 
+	@Override
+	public List<Photo> getList(String theme) {
+		return photoMapper.getPhotos(theme);
+	}
+
+	@Override
+	public List<Photo> getAllList() {
+		return photoMapper.getAllList();
+	}
+
+	@Override
+	public Photo getPhoto(String id) {
+		return photoMapper.selectByPrimaryKey(id);
+	}
 }

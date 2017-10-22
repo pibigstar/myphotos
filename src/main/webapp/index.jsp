@@ -47,7 +47,7 @@
     <!-- Main navbar -->
     <div class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.jsp"><img src="${layoutImages}/logo_light.png" alt=""></a>
+            <a class="navbar-brand" href="${prc}/user.do?toIndex"><img src="${layoutImages}/logo_light.png" alt=""></a>
 
             <ul class="nav navbar-nav visible-xs-block">
                 <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -195,17 +195,25 @@
                             <ul class="navigation navigation-main navigation-accordion">
                                 
                                 <li class="navigation-header"><span>我的相册</span> <i class="icon-menu" title="我的菜单"></i></li>
-                                <li class="active"><a href="index.jsp"><i class="icon-home4"></i> <span>首页</span></a></li>
+                                <li class="active"><a href="${prc}/user.do?toIndex"><i class="icon-home4"></i> <span>首页</span></a></li>
                                 <li>
                                     <a href="#"><i class="icon-copy"></i> <span>3D画廊相册</span></a>
                                     <ul>
-                                        <li><a href="${user.username}/show.do"  id="layout1">童真</a></li>                         
+                                    <c:forEach items="${photos }" var="photo">
+                                    <c:if test="${photo.theme==1 }">
+                                        <li><a href="${prc }/${photo.id }/show.do"  id="layout1">${photo.name }</a></li>                         
+                                    </c:if>
+                                    </c:forEach>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#"><i class="icon-droplet2"></i> <span>轮播图相册</span></a>
                                         <ul>
-                                        <li><a href="${user.username}/show.do" id="layout1">童真</a></li>                         
+                                        <c:forEach items="${photos }" var="photo">
+                                            <c:if test="${photo.theme==2 }">
+                                                <li><a href="${prc }/${photo.id }/show.do"  id="layout1">${photo.name }</a></li>                         
+                                            </c:if>
+                                        </c:forEach>                     
                                     </ul>
                                 </li>
 
@@ -242,7 +250,7 @@
                     </div>
                     <div class="breadcrumb-line">
                         <ul class="breadcrumb">
-                            <li><a href="index.jsp"><i class="icon-home2 position-left"></i> 首页</a></li>
+                            <li><a href="${prc}/user.do?toIndex"><i class="icon-home2 position-left"></i> 首页</a></li>
                             <li class="active">我的相册</li>
                         </ul>
                         <ul class="breadcrumb-elements">
@@ -267,7 +275,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="${prc }/photo.do?createPhoto" method="post" enctype="multipart/form-data">
+                            <form action="${prc }/photo.do?createPhoto" id="myForm" method="post" enctype="multipart/form-data">
                                 <div class="panel panel-flat">
                                     <div class="panel-heading">
                                         <div class="row">
@@ -311,7 +319,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>背景音乐:</label>
-                                                    <input name="mp3File" type="file" class="file-styled">
+                                                    <input name="mp3File" type="file" class="file-styled"  accept=".mp3" >
                                                     <span class="help-block">默认背景音乐为love.mp3,只能上传MP3文件</span>
                                                 </div>
 
@@ -321,7 +329,7 @@
                                                 </div>
                                                 <div id="imgsdiv" class="hidden"></div>
                                                 <div class="text-right">
-                                                    <button onclick="upload()" class="btn btn-primary">上传 <i class="icon-arrow-right14 position-right"></i></button>
+                                                    <a id="btnCreate" class="btn btn-primary">生成 <i class="icon-arrow-right14 position-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -348,18 +356,20 @@
     </div>
     <script type="text/javascript">
              $(function () {
+            	 
+            	 //上传图片文本框初始化
             	  $("#imagesFile").fileinput({
                       uploadUrl : "upload.do?uploadImg",//上传图片的url
                       allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
                       overwriteInitial : false,
-                      maxFileSize : 1000,//上传文件最大的尺寸
-                      maxFilesNum : 1,//上传最大的文件数量
+                      maxFileSize : 2000,//上传文件最大的尺寸
+                      maxFilesNum : 12,//上传最大的文件数量
                       initialCaption: "请上传你的照片",//文本框初始话value
                       slugCallback : function(filename) {
                           return filename.replace('(', '_').replace(']', '_');
                       }
                   });
-                          
+                  //图片上传成功后把图片地址赋值给文本框        
             	  $('#imagesFile').on('fileuploaded', function(event, data, previewId, index) {
                       var form = data.form, files = data.files, extra = data.extra,
                        response = data.response, reader = data.reader;
@@ -367,20 +377,15 @@
                        console.log(response.paths);//打印出路径
                     });
             	  
-            	  function checkUpload(){
-                      alert(11);
-                      if($("input[name=imagesPath]").length>0){
-                          return true;
+            	  //是否上传图片检测
+            	  $("#btnCreate").click(function(){
+            		  if($("input[name=imagesPath]").length>0){
+                          $("#myForm").submit();
                       }else{
-                          alert("请先上传照片");
-                          return false;
+                          alert("请上传完图片再生成相册");
                       }
-                  }
+            	  })
              });
-            	  function upload(){
-            		  if(checkUpload){
-            		  }
-            	  }
     </script>
 </body>
 </html>

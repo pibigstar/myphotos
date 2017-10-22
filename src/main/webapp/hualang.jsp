@@ -59,6 +59,7 @@ body {
     console.log('%c Pibigstar  ', 'text-shadow: 3px 1px 1px grey;background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;');
     console.log("%c 欢迎使用我的相册网站", "font-size:20pt");
 
+    
 (function () {
     /* ==== definitions ==== */
     var diapo = [], layers = [], ctx, pointer, scr, camera, light, fps = 0, quality = [1,2],
@@ -286,21 +287,21 @@ body {
 })().load({
     imgdata:[
         // north
-        {img:'${qiniu}/resources/${name}/imgs/1.jpg', x:-1000, y:0, z:1500, nx:0, nz:1},
-        {img:'${qiniu}/resources/${name}/imgs/2.jpg', x:0,     y:0, z:1500, nx:0, nz:1},
-        {img:'${qiniu}/resources/${name}/imgs/3.jpg', x:1000,  y:0, z:1500, nx:0, nz:1},
+        {img:'${qiniu}/${img1}', x:-1000, y:0, z:1500, nx:0, nz:1},
+        {img:'${qiniu}/${img2}', x:0,     y:0, z:1500, nx:0, nz:1},
+        {img:'${qiniu}/${img3}', x:1000,  y:0, z:1500, nx:0, nz:1},
         // east
-        {img:'${qiniu}/resources/${name}/imgs/4.jpg', x:1500,  y:0, z:1000, nx:-1, nz:0},
-        {img:'${qiniu}/resources/${name}/imgs/5.jpg', x:1500,  y:0, z:0, nx:-1, nz:0},
-        {img:'${qiniu}/resources/${name}/imgs/6.jpg', x:1500,  y:0, z:-1000, nx:-1, nz:0},
+        {img:'${qiniu}/${img4}', x:1500,  y:0, z:1000, nx:-1, nz:0},
+        {img:'${qiniu}/${img5}', x:1500,  y:0, z:0, nx:-1, nz:0},
+        {img:'${qiniu}/${img6}', x:1500,  y:0, z:-1000, nx:-1, nz:0},
         // south
-        {img:'${qiniu}/resources/${name}/imgs/7.jpg', x:1000,  y:0, z:-1500, nx:0, nz:-1},
-        {img:'${qiniu}/resources/${name}/imgs/8.jpg', x:0,     y:0, z:-1500, nx:0, nz:-1},
-        {img:'${qiniu}/resources/${name}/imgs/9.jpg', x:-1000, y:0, z:-1500, nx:0, nz:-1},
+        {img:'${qiniu}/${img7}', x:1000,  y:0, z:-1500, nx:0, nz:-1},
+        {img:'${qiniu}/${img8}', x:0,     y:0, z:-1500, nx:0, nz:-1},
+        {img:'${qiniu}/${img9}', x:-1000, y:0, z:-1500, nx:0, nz:-1},
         // west
-        {img:'${qiniu}/resources/${name}/imgs/10.jpg', x:-1500, y:0, z:-1000, nx:1, nz:0},
-        {img:'${qiniu}/resources/${name}/imgs/11.jpg', x:-1500, y:0, z:0, nx:1, nz:0},
-        {img:'${qiniu}/resources/${name}/imgs/12.jpg', x:-1500, y:0, z:1000, nx:1, nz:0}
+        {img:'${qiniu}/${img10}', x:-1500, y:0, z:-1000, nx:1, nz:0},
+        {img:'${qiniu}/${img11}', x:-1500, y:0, z:0, nx:1, nz:0},
+        {img:'${qiniu}/${img12}', x:-1500, y:0, z:1000, nx:1, nz:0}
     ],
     structure:[
         {
@@ -401,10 +402,14 @@ body {
 
 <body>
 
+    <c:forTokens items="${photo.imgsPath}" delims="," var="imgPath">
+       <input id="imgPath" type="hidden" value="${imgPath }"/>
+    </c:forTokens>
+    
     <!-- Main navbar -->
     <div class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="${prc}/index.jsp"><img src="${layoutImages}/logo_light.png" alt=""></a>
+            <a class="navbar-brand" href="${prc}/${prc}/user.do?toIndex"><img src="${layoutImages}/logo_light.png" alt=""></a>
 
             <ul class="nav navbar-nav visible-xs-block">
                 <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -499,7 +504,7 @@ body {
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <img src="${layoutImages}/placeholder.jpg" alt="">
-                        <span>派大星</span>
+                        <span>${user.username }</span>
                         <i class="caret"></i>
                     </a>
 
@@ -533,7 +538,7 @@ body {
                             <div class="media">
                                 <a href="#" class="media-left"><img src="${layoutImages}/placeholder.jpg" class="img-circle img-sm" alt=""></a>
                                 <div class="media-body">
-                                    <span class="media-heading text-semibold">派大星</span>
+                                    <span class="media-heading text-semibold">${user.username }</span>
                                     <div class="text-size-mini text-muted">
                                         <i class="icon-pin text-size-small"></i> &nbsp;郑州
                                     </div>
@@ -557,26 +562,27 @@ body {
 
                                 
                                 <li class="navigation-header"><span>我的相册</span> <i class="icon-menu" title="我的菜单"></i></li>
-                                <li class="active"><a href="${prc}/index.jsp"><i class="icon-home4"></i> <span>首页</span></a></li>
+                                <li class="active"><a href="${prc}/${prc}/user.do?toIndex"><i class="icon-home4"></i> <span>首页</span></a></li>
                                 
                                 <li>
                                     <a href="#"><i class="icon-copy"></i> <span>3D画廊相册</span></a>
                                     <ul>
-                                        <li><a href="${prc }/${name}/show.do" id="layout1">童真</a></li>                          
+                                    <c:forEach items="${photos }" var="photo">
+                                    <c:if test="${photo.theme==1 }">
+                                        <li><a href="${prc }/${photo.id}/show.do"  id="layout1">${photo.name }</a></li>                         
+                                    </c:if>
+                                    </c:forEach>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#"><i class="icon-droplet2"></i> <span>轮播图相册</span></a>
                                         <ul>
-                                        <li><a href="${prc }/${name}/show.do" id="layout1">童真</a></li>                          
+                                        <c:forEach items="${photos }" var="photo">
+                                            <c:if test="${photo.theme==2 }">
+                                                <li><a href="${prc }/${photo.id}/show.do"  id="layout1">${photo.name }</a></li>                         
+                                            </c:if>
+                                        </c:forEach>                     
                                     </ul>
-                                </li>
-
-                                <!-- 系统功能 -->
-                                <li class="navigation-header"><span>系统功能</span> <i class="icon-menu" title="Forms"></i></li>
-                                
-                                <li>
-                                    <a href="${prc }/fankui.jsp"><i class="icon-spell-check"></i> <span>反馈</span></a>
                                 </li>
                                 <!-- 系统功能end -->
 
@@ -608,7 +614,7 @@ body {
 
                     <div class="breadcrumb-line">
                         <ul class="breadcrumb">
-                            <li><a href="${prc}/index.jsp"><i class="icon-home2 position-left"></i> 首页</a></li>
+                            <li><a href="${prc}/${prc}/user.do?toIndex"><i class="icon-home2 position-left"></i> 首页</a></li>
                             <li class="active">3D画廊</li>
                         </ul>
 
@@ -637,7 +643,7 @@ body {
 
                     <div style="text-align:center;clear:both;"></div>
                     <canvas id="canvas">你的浏览器不支持HTML5画布技术，请使用谷歌浏览器。</canvas>
-                    <audio src="${qiniu}/resources/${name }/mp3/love.mp3"  id="music"  autoplay="autoplay"></audio>
+                    <audio src="${qiniu}/${photo.mp3Path}"  id="music"  autoplay="autoplay"></audio>
 
 
                     <!-- Footer -->

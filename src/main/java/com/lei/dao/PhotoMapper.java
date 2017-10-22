@@ -1,5 +1,7 @@
 package com.lei.dao;
 
+import java.util.List;
+
 import com.lei.model.Photo;
 
 public interface PhotoMapper {
@@ -14,4 +16,8 @@ public interface PhotoMapper {
     int updateByPrimaryKeySelective(Photo record);
 
     int updateByPrimaryKey(Photo record);
+
+	List<Photo> getPhotos(String theme);
+
+	List<Photo> getAllList();
 }

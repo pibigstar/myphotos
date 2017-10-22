@@ -1,5 +1,6 @@
 package com.lei.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lei.model.Photo;
 import com.lei.model.User;
+import com.lei.service.PhotoServiceI;
 import com.lei.service.UserServiceI;
 import com.lei.utils.QiNiuUtil;
 import com.lei.utils.ResourceUtil;
@@ -23,10 +26,14 @@ public class UserController {
 
 	@Resource
 	private UserServiceI userService;
+	@Resource
+	private PhotoServiceI PhotoService;
 
 	@RequestMapping(params="toIndex")
 	public String toIndex(ModelMap modelMap) {
-		return "redirect:index.jsp";
+		List<Photo> photos = PhotoService.getAllList();
+		modelMap.put("photos", photos);
+		return "index";
 	}
 	
 	@RequestMapping(params="toLogin")

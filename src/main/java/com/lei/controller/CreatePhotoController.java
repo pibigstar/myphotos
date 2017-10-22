@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,8 +34,7 @@ public class CreatePhotoController {
 	private PhotoServiceI photoService;
 
 	@RequestMapping(params = "createPhoto",method = RequestMethod.POST)
-	public ModelAndView create(@RequestParam("imagesPath") String[] imgsPath,Photo photo,MultipartFile mp3File,HttpSession session) throws IOException {
-		ModelAndView mv = new ModelAndView();
+	public String create(@RequestParam("imagesPath") String[] imgsPath,Photo photo,MultipartFile mp3File,HttpSession session) throws IOException {
 		User user =(User)session.getAttribute("user");
 		
 		StringBuffer imgPath = new StringBuffer();
@@ -45,20 +45,20 @@ public class CreatePhotoController {
 			imgPath.append(imgsPath[i]);
 		}
 		
-		System.out.println(imgPath);
 		photo.setId(UUID.randomUUID().toString());
 		photo.setUserId(user.getId());
-		String mp3Path = "/"+user.getUsername()+"/"+photo.getName()+"/"+UUID.randomUUID().toString()+".mp3";
-		//QiNiuUtil.upload(mp3File.getInputStream(), mp3Path);
+		String mp3Path = "";
+		if (mp3File.getBytes().length>0) {
+			mp3Path = user.getUsername()+"/"+UUID.randomUUID().toString()+".mp3";
+			QiNiuUtil.upload(mp3File.getInputStream(), mp3Path);
+		}else {
+			mp3Path = "default/mp3/love.mp3";
+		}
 		photo.setMp3Path(mp3Path);
-
 		photo.setCreateTime(new Date());
 		photo.setImgsPath(imgPath.toString());
 		photoService.save(photo);
 
-		mv.setViewName("index");
-		return mv;
-
+		return "redirect:user.do?toIndex";
 	}
-
 }
